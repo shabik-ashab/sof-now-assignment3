@@ -1,6 +1,7 @@
 """Image processing operations using OpenCV."""
 
 import cv2
+import numpy as np
 
 
 class ImageProcessor:
@@ -28,7 +29,8 @@ class ImageProcessor:
     @staticmethod
     def adjust_brightness(image, value):
         """Adjust image brightness."""
-        return cv2.convertScaleAbs(image, alpha=1, beta=value)
+        output = cv2.convertScaleAbs(image, alpha=1, beta=value)
+        return np.uint8(np.clip(output, 0, 255))
 
     @staticmethod
     def adjust_contrast(image, value):
